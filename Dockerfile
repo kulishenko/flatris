@@ -1,8 +1,13 @@
-FROM node:12
-WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn --frozen-lockfile
-COPY . ./
+FROM node
+
+RUN mkdir /skillbox
+
+WORKDIR /skillbox
+
+COPY . /skillbox
+
+RUN yarn install
+RUN yarn test
 RUN yarn build
-EXPOSE 3000
+
 CMD yarn start
